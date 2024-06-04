@@ -1,13 +1,17 @@
 from app import app
 from app.forms import SearchForm
-from flask import request, render_template, Request
-from dataclasses import dataclass
+from flask import request, render_template, Request, redirect, url_for
+from app.db import Search, Session, Base, engine
 from flask_wtf import Form
 
 
-@dataclass()
-class SearchData:
-    text: str = ""
+Base.metadata.drop_all(engine)
+Base.metadata.create_all(engine)
+
+
+@app.get("/")
+def index():
+    return render_template("base.html")
 
 
 @app.get("/search")
@@ -18,8 +22,14 @@ def search_get():
 
 @app.post("/search")
 def search_post():
-    form = SearchForm(request.form)
+    form = SearchForm(
+        request.form,
+    )
     form: Form
-    search_data = SearchData()
-    form.populate_obj(search_data)
+    if form.validate():
+        with Session.begin() as session:
+            search_data = Search()
+            form.populate_obj(search_data)
+            session.add(search_data)
+        return redirect(url_for(index.__name__))
     return render_template("search.html", form=form)
