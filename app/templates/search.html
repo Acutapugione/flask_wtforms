@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+
+
+<div class="container">
+    <form method="post">
+        {% for field in form %}
+            <div>
+                {{ field.label }}
+                {{ field }}
+            </div>
+        {% endfor %}
+    </form>
+</div>
+
+
+
+
+    
+{% endblock %}
