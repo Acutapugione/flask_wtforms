@@ -1,6 +1,6 @@
 from app import app
 from app.forms import SearchForm
-from flask import request, render_template, Request, redirect, url_for
+from flask import flash, request, render_template, Request, redirect, url_for
 from app.db import Search, Session, Base, engine
 from flask_wtf import Form
 
@@ -32,4 +32,5 @@ def search_post():
             form.populate_obj(search_data)
             session.add(search_data)
         return redirect(url_for(index.__name__))
+    print(f"{form.errors=}")
     return render_template("search.html", form=form)

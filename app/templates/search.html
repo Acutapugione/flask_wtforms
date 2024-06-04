@@ -2,8 +2,12 @@
 
 {% block main %}
 
+<ul>
 
-
+    {% for error, value in form.errors.items() %}
+        <li>{{value}}</li>
+    {% endfor %}
+</ul>
 <div class="container">
     <form method="post">
         {% for field in form %}

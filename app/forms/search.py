@@ -14,5 +14,8 @@ from wtforms.validators import (
 
 
 class SearchForm(Form):
-    text = StringField("Enter text to search")
-    # submit = SubmitField("Run searching")
+    text = StringField(
+        "Enter text to search",
+        validators=[DataRequired("This is required field, my boy)")],
+    )
+    submit = SubmitField("Run searching")
