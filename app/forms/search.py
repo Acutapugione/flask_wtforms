@@ -19,7 +19,7 @@ class AnyForm(Form):
         validators=[
             DataRequired("This is required field, my boy)"),
             EqualTo("subtext", "Must be equal"),
-            Length(min=10, max=15),
+            Length(min=1112, max=15),
         ],
     )
     subtext = StringField("Repeat please")
