@@ -13,7 +13,7 @@ from wtforms.validators import (
 )
 
 
-class SearchForm(Form):
+class AnyForm(Form):
     text = StringField(
         "Enter text to search",
         validators=[
